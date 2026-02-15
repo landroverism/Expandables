@@ -1,3 +1,5 @@
+import PartyBackground from './PartyBackground';
+
 export default function Footer() {
   return (
     <footer
@@ -7,15 +9,7 @@ export default function Footer() {
       className="footer_section"
     >
       <div className="footer_img">
-        <img
-          src="https://cdn.prod.website-files.com/68532a35829494931a29b25b/6882621abd224449b5d8d9c7_Footer1.webp"
-          loading="lazy"
-          data-img=""
-          alt=""
-          sizes="(max-width: 1891px) 100vw, 1891px"
-          srcSet="https://cdn.prod.website-files.com/68532a35829494931a29b25b/6882621abd224449b5d8d9c7_Footer1-p-500.webp 500w, https://cdn.prod.website-files.com/68532a35829494931a29b25b/6882621abd224449b5d8d9c7_Footer1-p-800.webp 800w, https://cdn.prod.website-files.com/68532a35829494931a29b25b/6882621abd224449b5d8d9c7_Footer1-p-1080.webp 1080w, https://cdn.prod.website-files.com/68532a35829494931a29b25b/6882621abd224449b5d8d9c7_Footer1-p-1600.webp 1600w, https://cdn.prod.website-files.com/68532a35829494931a29b25b/6882621abd224449b5d8d9c7_Footer1.webp 1891w"
-          className="img-cover"
-        />
+        <PartyBackground />
       </div>
       <div className="footer_parent">
         <div className="footer">
