@@ -245,6 +245,33 @@ body.burger-open .nav_burger .btn_text > div:last-child { display: block !import
     background: #080414;
 }
 
+/* --- GlowText: scroll-driven word-by-word reveal --- */
+.glow-text {
+    /* inherit all type styles from parent */
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    line-height: inherit;
+    margin: 0;
+}
+
+.glow-word {
+    /*
+     * --wp is set inline by the component (0 → 1).
+     * We interpolate from a dim dark-grey to bright white.
+     */
+    color: color-mix(
+        in srgb,
+        rgba(255, 255, 255, 1) calc(var(--wp) * 100%),
+        rgba(255, 255, 255, 0.12)
+    );
+    transition: color 0.15s ease;
+    /* optional subtle glow on fully-lit words */
+    text-shadow:
+        0 0 calc(var(--wp) * 8px) rgba(255, 255, 255, calc(var(--wp) * 0.3)),
+        0 0 calc(var(--wp) * 20px) rgba(200, 180, 255, calc(var(--wp) * 0.12));
+}
+
 /* --- Section scroll-in animations --- */
 main .section {
     opacity: 0;
