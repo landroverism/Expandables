@@ -1,0 +1,563 @@
+/* ======================================================
+   Custom CSS extracted from www.ciridae.com/index.html
+   All inline <style> blocks consolidated here
+   ====================================================== */
+
+/* --- Content reveal (Ciridae app reveals after load) --- */
+main,
+nav {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+body.content-visible main,
+body.content-visible nav {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* --- Hide old Ciridae SVG logos --- */
+.logo-small svg,
+.logo-pieces svg,
+.logo-piece,
+.logo-piece_chars,
+.text-logo {
+    display: none !important;
+}
+
+/* --- Show site logo (new-logo.png) --- */
+.logo-small,
+.logo-pieces,
+.hero_logo,
+.builds_logo,
+.points_logo,
+.footer_logo,
+.popup_logo {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+img.site-logo,
+.hero_logo img,
+.builds_logo img,
+.points_logo img,
+.footer_logo img,
+.logo-small img[src*="new-logo"],
+.logo-small img[src*="logo"] {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 32px;
+}
+
+.nav_logo .logo-small,
+.burger_logo .logo-small {
+    height: 56px;
+    min-height: 56px;
+}
+
+.nav_logo img.site-logo,
+.nav_logo .logo-small img,
+.burger_logo img.site-logo,
+.burger_logo .logo-small img {
+    height: 52px;
+    width: auto;
+    max-width: 300px;
+    object-fit: contain;
+}
+
+.popup_logo img.site-logo,
+.popup_logo img {
+    height: 64px;
+    width: auto;
+    max-width: 360px;
+    object-fit: contain;
+}
+
+.hero_logo {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero_logo img.site-logo,
+.hero_logo img {
+    max-width: min(800px, 92vw);
+    width: 92%;
+    height: auto;
+    object-fit: contain;
+}
+
+.builds_logo {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.builds_logo img.site-logo,
+.builds_logo img {
+    max-width: min(650px, 88vw);
+    width: 88%;
+    height: auto;
+    object-fit: contain;
+}
+
+.points_logo img.site-logo,
+.points_logo img {
+    width: 120px;
+    height: auto;
+    max-width: 140px;
+    object-fit: contain;
+}
+
+/* --- Points item background images --- */
+.points_item {
+    position: relative;
+    overflow: hidden;
+}
+
+.points_item-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.points_item-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    filter: brightness(0.3) saturate(0.6);
+    transition: opacity 0.8s var(--smooth, ease), transform 1.2s var(--smooth, ease);
+    transform: scale(1.05);
+}
+
+/* Reveal background on hover */
+.points_item:hover .points_item-bg img {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Dark gradient overlays so text stays readable */
+.points_item-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--color--black, #000), transparent 10%) 0%,
+        color-mix(in srgb, var(--color--black, #000), transparent 40%) 40%,
+        color-mix(in srgb, var(--color--black, #000), transparent 10%) 100%
+    );
+    pointer-events: none;
+}
+
+/* Subtle glow on the hovered card edges */
+.points_item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    opacity: 0;
+    box-shadow: inset 0 0 60px 10px color-mix(in srgb, var(--color--orange, #cc6437), transparent 80%);
+    transition: opacity 0.6s var(--smooth, ease);
+    pointer-events: none;
+}
+
+.points_item:hover::before {
+    opacity: 1;
+}
+
+.footer_logo {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer_logo img.site-logo,
+.footer_logo img {
+    max-width: min(500px, 92vw);
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* --- Burger menu --- */
+.burger {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    background: var(--color--black, #000);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.burger.burger-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+body.burger-open {
+    overflow: hidden;
+}
+.nav_burger {
+    cursor: pointer;
+    user-select: none;
+}
+body.burger-open .nav_burger .btn_text > div:first-child { display: none !important; }
+body.burger-open .nav_burger .btn_text > div:last-child { display: block !important; }
+.nav_burger .btn_text > div:last-child { display: none; }
+
+/* --- Party background canvas (replaces video in hero) --- */
+.party-bg-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+    background: #080414;
+}
+
+/* --- Section scroll-in animations --- */
+main .section {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+main .section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Ciridae animation variables (from external app engine) --- */
+:root {
+    --ease: .8s cubic-bezier(.84, 0, .16, 1);
+    --expoInOut: cubic-bezier(.87, 0, .13, 1);
+    --smooth: cubic-bezier(.76, 0, .24, 1);
+}
+
+/* --- Smooth transitions for interactive elements --- */
+.btn, .text-link, .cases_item, .burger_item {
+    transition: opacity 0.25s ease, transform 0.2s ease;
+}
+.btn:hover, .text-link:hover { opacity: 0.85; }
+
+/* ================================================================
+   CaseStudies / Packages – HOVER-EXPAND accordion animation
+   Extracted from the Ciridae external engine (app.js / index.css)
+   ================================================================ */
+
+/* --- Desktop: flex accordion layout (992px+) --- */
+@media screen and (min-width: 992px) {
+    .cases_list {
+        height: 80vh;
+        min-height: 500px;
+        display: flex;
+    }
+
+    .cases_item {
+        /* flex: max(.3, var(--flex-grow)) — active expands, rest shrink */
+        flex: max(0.3, var(--flex-grow, 1));
+        min-height: 100px;
+        align-self: center;
+        transition: flex 0.8s var(--smooth, cubic-bezier(.76, 0, .24, 1));
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cases_item .cases_image {
+        height: 100%;
+        overflow: clip;
+        aspect-ratio: 16 / 9 !important;
+    }
+
+    .cases_item .cases_image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.001);
+        transition: transform 0.8s var(--smooth, cubic-bezier(.76, 0, .24, 1));
+    }
+
+    /* "Read more" tag: hidden by default, shown on image hover */
+    .cases_item .cases_image-tag {
+        transition: opacity 0.2s var(--smooth, ease);
+        opacity: 0;
+        pointer-events: none !important;
+    }
+
+    .cases_item .cases_image:hover .cases_image-tag {
+        opacity: 1;
+        transition: opacity 0.4s var(--smooth, ease);
+    }
+
+    /* Text/index hidden by default on inactive items */
+    .cases_item .cases_index,
+    .cases_item .cases_descr > .f-14,
+    .cases_item .cases_descr-text {
+        transition: opacity 0.4s var(--smooth, ease) 0s;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* ===== ACTIVE STATE (hover or auto-cycle) ===== */
+    .cases_item.active .cases_index,
+    .cases_item.active .cases_descr > .f-14,
+    .cases_item.active .cases_descr-text {
+        opacity: 1;
+        pointer-events: auto;
+        transition: opacity 0.6s var(--smooth, ease) 0s;
+    }
+
+    .cases_item.active .cases_image img {
+        transform: scale(1.05);
+    }
+}
+
+/* --- Mobile: vertical stacked with decorative line --- */
+@media screen and (max-width: 991px) {
+    .cases_image {
+        position: relative;
+    }
+
+    .cases_image:before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        width: 1px;
+        transform: translate(-50%);
+        background-image: linear-gradient(180deg, var(--color--white, #fff), rgba(206, 206, 206, 0.5));
+        top: -1.125rem;
+        bottom: -2rem;
+    }
+
+    .cases_image img {
+        position: relative;
+        z-index: 2;
+    }
+
+    /* On mobile, all text is always visible */
+    .cases_item .cases_index,
+    .cases_item .cases_descr > .f-14,
+    .cases_item .cases_descr-text {
+        opacity: 1;
+    }
+}
+
+/* --- Cases line animation --- */
+.cases_line {
+    transform-origin: left center;
+    transition: transform 1s var(--smooth, ease);
+}
+
+.section.is-visible .cases_line {
+    transform: scaleX(1);
+}
+
+/* --- Contact section --- */
+.contact_wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 56rem;
+    margin: 0 auto;
+    align-items: start;
+}
+.contact_form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.contact_label {
+    display: block;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+.contact_input {
+    width: 100%;
+    padding: 0.75rem 0;
+    font-size: 1rem;
+    font-family: inherit;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid currentColor;
+    color: inherit;
+    outline: none;
+    resize: vertical;
+}
+textarea.contact_input { min-height: 6rem; }
+.contact_input::placeholder { opacity: 0.5; }
+.contact_form .btn, .contact_submit { cursor: pointer; align-self: flex-start; margin-top: 0.5rem; }
+
+@media screen and (max-width: 767px) {
+    .contact_wrapper {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+}
+
+/* ================================================================
+   Package Cards Section – "Our Packages" visual cards
+   ================================================================ */
+
+.pkg-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 72rem;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 991px) {
+    .pkg-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 28rem;
+    }
+}
+
+/* --- Individual card --- */
+.pkg-card {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--color--black, #000), transparent 5%);
+    border: 1px solid color-mix(in srgb, currentColor, transparent 85%);
+    display: flex;
+    flex-direction: column;
+
+    /* Staggered entrance animation */
+    opacity: 0;
+    transform: translateY(40px);
+    transition:
+        opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) var(--card-delay, 0s),
+        transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) var(--card-delay, 0s),
+        border-color 0.4s var(--smooth, ease),
+        box-shadow 0.4s var(--smooth, ease);
+}
+
+.pkg-card.pkg-card--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pkg-card:hover {
+    border-color: var(--color--orange, #cc6437);
+    box-shadow:
+        0 0 0 1px var(--color--orange, #cc6437),
+        0 20px 60px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Tag badge --- */
+.pkg-card__tag {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 3;
+    padding: 0.375rem 0.75rem;
+    border-radius: 100vw;
+    background: var(--color--orange, #cc6437);
+    color: var(--color--black, #000);
+    pointer-events: none;
+}
+
+/* --- Image area --- */
+.pkg-card__image {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+}
+
+.pkg-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--smooth, ease), filter 0.6s var(--smooth, ease);
+    filter: brightness(0.85);
+}
+
+.pkg-card:hover .pkg-card__image img {
+    transform: scale(1.08);
+    filter: brightness(1);
+}
+
+.pkg-card__image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 40%,
+        color-mix(in srgb, var(--color--black, #000), transparent 20%) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* --- Content area --- */
+.pkg-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    flex: 1;
+}
+
+.pkg-card__title {
+    color: inherit;
+}
+
+.pkg-card__desc {
+    opacity: 0.7;
+    margin: 0;
+    flex: 1;
+}
+
+/* --- Book Now button --- */
+.pkg-card__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border: 1px solid color-mix(in srgb, currentColor, transparent 60%);
+    border-radius: 100vw;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+    transition:
+        background-color 0.35s var(--smooth, ease),
+        border-color 0.35s var(--smooth, ease),
+        color 0.35s var(--smooth, ease),
+        gap 0.35s var(--smooth, ease);
+}
+
+.pkg-card__btn:hover {
+    background: var(--color--orange, #cc6437);
+    border-color: var(--color--orange, #cc6437);
+    color: var(--color--black, #000);
+    gap: 0.75rem;
+}
+
+.pkg-card__btn svg {
+    transition: transform 0.35s var(--smooth, ease);
+}
+
+.pkg-card__btn:hover svg {
+    transform: translateX(2px);
+}
