@@ -115,6 +115,19 @@ img.site-logo,
 .points_item {
     position: relative;
     overflow: hidden;
+
+    /* Staggered entrance animation (hidden until observed) */
+    opacity: 0;
+    transform: translateY(60px) scale(0.96);
+    transition:
+        opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) var(--stagger, 0s),
+        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) var(--stagger, 0s);
+}
+
+/* Card rises into view when parent section is observed */
+.points_item.points-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
 
 .points_item-bg {
@@ -128,15 +141,15 @@ img.site-logo,
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0;
-    filter: brightness(0.3) saturate(0.6);
-    transition: opacity 0.8s var(--smooth, ease), transform 1.2s var(--smooth, ease);
-    transform: scale(1.05);
+    opacity: 1;
+    filter: brightness(0.28) saturate(0.55);
+    transition: filter 0.8s var(--smooth, ease), transform 1.2s var(--smooth, ease);
+    transform: scale(1.02);
 }
 
-/* Reveal background on hover */
+/* Brighten & zoom on hover for interactive feel */
 .points_item:hover .points_item-bg img {
-    opacity: 1;
+    filter: brightness(0.45) saturate(0.8);
     transform: scale(1);
 }
 
@@ -148,9 +161,9 @@ img.site-logo,
     z-index: 1;
     background: linear-gradient(
         180deg,
-        color-mix(in srgb, var(--color--black, #000), transparent 10%) 0%,
-        color-mix(in srgb, var(--color--black, #000), transparent 40%) 40%,
-        color-mix(in srgb, var(--color--black, #000), transparent 10%) 100%
+        color-mix(in srgb, var(--color--black, #000), transparent 5%) 0%,
+        color-mix(in srgb, var(--color--black, #000), transparent 35%) 40%,
+        color-mix(in srgb, var(--color--black, #000), transparent 5%) 100%
     );
     pointer-events: none;
 }

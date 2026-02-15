@@ -1,4 +1,8 @@
+import { useEffect, useRef } from 'react';
+
 export default function PointsSection() {
+  const contentRef = useRef(null);
+
   const steps = [
     {
       tag: '01 - CS',
@@ -20,6 +24,31 @@ export default function PointsSection() {
     },
   ];
 
+  /* ---- Staggered scroll-in: cards rise one by one ---- */
+  useEffect(() => {
+    const container = contentRef.current;
+    if (!container) return;
+
+    const cards = container.querySelectorAll('.points_item');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Trigger each card with its stagger delay
+            cards.forEach((card) => card.classList.add('points-visible'));
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+    );
+
+    observer.observe(container);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="section">
       <div className="container">
@@ -28,9 +57,13 @@ export default function PointsSection() {
             <div className="points_bg-parent">
               <img src="https://cdn.prod.website-files.com/68532a35829494931a29b25b/68b0a06762f9bbbda09e68a5_Hero.webp" loading="lazy" alt="" className="img-cover" />
             </div>
-            <div className="points_content">
+            <div className="points_content" ref={contentRef}>
               {steps.map((step, i) => (
-                <div className="points_item" key={i}>
+                <div
+                  className="points_item"
+                  key={i}
+                  style={{ '--stagger': `${i * 0.2}s` }}
+                >
                   {/* Background image with dark blend overlay */}
                   <div className="points_item-bg">
                     <img src={step.bgImage} alt="" loading="lazy" />
