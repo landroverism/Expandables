@@ -258,18 +258,15 @@ body.burger-open .nav_burger .btn_text > div:last-child { display: block !import
 .glow-word {
     /*
      * --wp is set inline by the component (0 → 1).
-     * We interpolate from a dim dark-grey to bright white.
+     * Dim state: dark grey (0.18 opacity) – visible but subdued.
+     * Lit state:  bright white (1.0 opacity) – fully glowing.
      */
     color: color-mix(
         in srgb,
         rgba(255, 255, 255, 1) calc(var(--wp) * 100%),
-        rgba(255, 255, 255, 0.12)
+        rgba(255, 255, 255, 0.18)
     );
-    transition: color 0.15s ease;
-    /* optional subtle glow on fully-lit words */
-    text-shadow:
-        0 0 calc(var(--wp) * 8px) rgba(255, 255, 255, calc(var(--wp) * 0.3)),
-        0 0 calc(var(--wp) * 20px) rgba(200, 180, 255, calc(var(--wp) * 0.12));
+    transition: color 0.18s ease;
 }
 
 /* --- Section scroll-in animations --- */
