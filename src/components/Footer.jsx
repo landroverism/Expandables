@@ -1,6 +1,46 @@
+import { useEffect, useRef, useCallback } from 'react';
 import PartyBackground from './PartyBackground';
 
 export default function Footer() {
+  const imgRef = useRef(null);
+  const ticking = useRef(false);
+
+  const handleScroll = useCallback(() => {
+    if (ticking.current) return;
+    ticking.current = true;
+
+    requestAnimationFrame(() => {
+      ticking.current = false;
+      const el = imgRef.current;
+      if (!el) return;
+
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+
+      // Progress: 0 when element bottom is at viewport bottom → 1 when element top reaches viewport top
+      const raw = (vh - rect.top) / (vh + rect.height);
+      const progress = Math.max(0, Math.min(1, raw));
+
+      // Scale: 1 → 0.88 as you scroll through
+      const scale = 1 - progress * 0.12;
+      // Border-radius: 0 → 24px
+      const radius = progress * 24;
+
+      el.style.transform = `scale(${scale})`;
+      el.style.borderRadius = `${radius}px`;
+    });
+  }, []);
+
+  useEffect(() => {
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [handleScroll]);
+
   return (
     <footer
       data-blur="https://cdn.prod.website-files.com/68532a35829494931a29b25b/685ab0939fab945df8ed201d_footer-texture.jpg"
@@ -8,7 +48,7 @@ export default function Footer() {
       data-module="Footer"
       className="footer_section"
     >
-      <div className="footer_img">
+      <div className="footer_img" ref={imgRef}>
         <PartyBackground />
       </div>
       <div className="footer_parent">

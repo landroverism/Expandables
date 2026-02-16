@@ -185,10 +185,13 @@ img.site-logo,
     opacity: 1;
 }
 
-/* --- Footer image area: party canvas fills the space --- */
+/* --- Footer image area: party canvas + closing-card scroll effect --- */
 .footer_img {
     position: relative;
     overflow: hidden;
+    transform-origin: center center;
+    will-change: transform, border-radius;
+    transition: border-radius 0.05s linear;
 }
 
 .footer_img .party-bg-canvas {
